@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kirish — Bexa AI Academy</title>
+<link rel="icon" href="img/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Unbounded:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div class="auth">
+  <aside class="auth-side">
+    <div class="hero-bg" style="position:absolute;inset:0;z-index:-1"><div class="grid-bg"></div><div class="orb o1"></div><div class="orb o2"></div></div>
+    <a href="/" class="logo"><img src="img/logo-dark.png" alt="Bexa AI Academy" style="height:44px"></a>
+    <div>
+      <h2>Sun'iy intellekt davrida <span style="color:var(--red)">kasb egallang</span></h2>
+      <p>Video darslar, amaliy topshiriqlar, adminlar tekshiruvi va o'quvchilar hamjamiyati — barchasi bitta kabinetda.</p>
+    </div>
+    <span class="muted" style="font-size:13px">© Bexa AI Academy</span>
+  </aside>
+  <main class="auth-main">
+    <div class="auth-box">
+      <a href="/" class="back">← Bosh sahifa</a>
+      <div class="tabs" id="tabs"><span class="pill"></span><button data-t="login" class="on">Kirish</button><button data-t="register">Ariza qoldirish</button></div>
+
+      <div class="pane on" id="login">
+        <h1>Xush kelibsiz</h1>
+        <p class="muted" style="margin-bottom:24px;font-size:14px">Login va parolingiz bilan kiring</p>
+        <form id="loginForm">
+          <div class="field"><label>Login</label><input class="input" name="username" autocomplete="username" required></div>
+          <div class="field"><label>Parol</label><input class="input" name="password" type="password" autocomplete="current-password" required></div>
+          <button class="btn btn-red btn-block btn-lg">Kirish <span class="arrow">→</span></button>
+        </form>
+      </div>
+
+      <div class="pane" id="register">
+        <h1>Kursga ariza</h1>
+        <p class="muted" style="margin-bottom:24px;font-size:14px">Ariza qoldiring — to'lovdan so'ng admin tasdiqlaydi va barcha darslar ochiladi.</p>
+        <form id="regForm">
+          <div class="field"><label>Ism va familiya</label><input class="input" name="full_name" required maxlength="80"></div>
+          <div class="row2">
+            <div class="field"><label>Login</label><input class="input" name="username" required pattern="[a-zA-Z0-9_.]{3,30}" title="3–30 belgi: lotin harflari, raqam, _ yoki ." autocomplete="username"></div>
+            <div class="field"><label>Telefon</label><input class="input" name="phone" placeholder="+998" maxlength="30"></div>
+          </div>
+          <div class="field"><label>Telegram</label><input class="input" name="telegram" placeholder="@username" maxlength="60"></div>
+          <div class="field"><label>Parol</label><input class="input" name="password" type="password" minlength="6" required autocomplete="new-password"><span class="hint">Kamida 6 belgi</span></div>
+          <div class="field"><label>Izoh (ixtiyoriy)</label><textarea class="input" name="app_note" maxlength="500" style="min-height:70px" placeholder="Masalan: to'lov qildim / qaysi kurs kerak"></textarea></div>
+          <button class="btn btn-red btn-block btn-lg">Ariza yuborish <span class="arrow">→</span></button>
+        </form>
+      </div>
+    </div>
+  </main>
+</div>
+<script src="js/common.js"></script>
+<script>
+  const show = (t) => {
+    $$('#tabs button').forEach((b) => b.classList.toggle('on', b.dataset.t === t));
+    $('#tabs').classList.toggle('second', t === 'register');
+    $$('.pane').forEach((p) => p.classList.toggle('on', p.id === t));
+  };
+  $$('#tabs button').forEach((b) => b.onclick = () => { history.replaceState(null, '', '#' + b.dataset.t); show(b.dataset.t); });
+  if (location.hash === '#register') show('register');
+
+  const go = (role) => location.href = role === 'student' ? '/kabinet' : '/admin';
+  api('/api/auth/me').then((d) => d.user && go(d.user.role));
+
+  async function submit(e, url) {
+    e.preventDefault();
+    const btn = $('button', e.target);
+    btn.disabled = true;
+    try { const d = await api(url, { method: 'POST', body: Object.fromEntries(new FormData(e.target)) }); go(d.role); }
+    catch (err) { toast(err.message, 'err'); btn.disabled = false; }
+  }
+  $('#loginForm').onsubmit = (e) => submit(e, '/api/auth/login');
+  $('#regForm').onsubmit = (e) => submit(e, '/api/auth/register');
+</script>
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kabinet — Bexa AI Academy</title>
+<link rel="icon" href="img/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Unbounded:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div class="shell">
+  <aside class="side">
+    <a href="/" class="logo"><img src="img/logo-dark.png" alt="Bexa AI Academy"></a>
+    <nav>
+      <a href="#ariza" data-v="ariza" class="pending-only" hidden><span class="i">⏳</span>Ariza holati</a>
+      <a href="#darslar" data-v="darslar"><span class="i">▶</span>Darslar</a>
+      <a href="#ishlar" data-v="ishlar"><span class="i">◫</span>O'quvchilar ishlari</a>
+      <a href="#mening" data-v="mening"><span class="i">★</span>Mening ishlarim</a>
+      <a href="#chat" data-v="chat"><span class="i">💬</span>O'quvchilar chati</a>
+      <a href="#bot" data-v="bot"><span class="i">✦</span>Bexa AI bot</a>
+      <div class="grp">Hisob</div>
+      <a href="#profil" data-v="profil"><span class="i">⚙</span>Profil</a>
+      <a id="buyLink" target="_blank" rel="noopener"><span class="i">🛒</span>Kursni sotib olish</a>
+    </nav>
+    <div class="me"><div class="ava" id="meAva"></div><div><b id="meName"></b><small>O'quvchi</small></div><button class="icon-btn" onclick="logout()" title="Chiqish">⇥</button></div>
+  </aside>
+  <div class="main">
+    <div class="topbar"><button class="icon-btn" id="menuBtn">☰</button><img src="img/logo-dark.png" alt=""><button class="icon-btn" onclick="logout()">⇥</button></div>
+    <div id="page"></div>
+  </div>
+</div>
+<script src="js/common.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>

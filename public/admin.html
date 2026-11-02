@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Admin panel — Bexa AI Academy</title>
+<link rel="icon" href="img/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Unbounded:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div class="shell">
+  <aside class="side">
+    <a href="/" class="logo"><img src="img/logo-dark.png" alt="Bexa AI Academy"></a>
+    <nav>
+      <a href="#dashboard" data-v="dashboard"><span class="i">◧</span>Dashboard</a>
+      <a href="#loyihalar" data-v="loyihalar"><span class="i">◆</span>Loyihalar</a>
+      <a href="#chat" data-v="chat"><span class="i">💬</span>Adminlar chati</a>
+      <div class="grp">O'quv jarayoni</div>
+      <a href="#arizalar" data-v="arizalar"><span class="i">✉</span>Arizalar<span class="cnt" id="bApps" hidden></span></a>
+      <a href="#tekshiruv" data-v="tekshiruv"><span class="i">✓</span>Tekshiruv<span class="cnt" id="bPending" hidden></span></a>
+      <a href="#darslar" data-v="darslar"><span class="i">▶</span>Darslar</a>
+      <a href="#yordam" data-v="yordam"><span class="i">✦</span>Bot xabarlari<span class="cnt" id="bSupport" hidden></span></a>
+      <a href="#oquvchilar" data-v="oquvchilar"><span class="i">👥</span>O'quvchilar</a>
+      <a href="#ochat" data-v="ochat"><span class="i">◎</span>O'quvchilar chati</a>
+      <div class="grp">Sozlamalar</div>
+      <a href="#sayt" data-v="sayt"><span class="i">⚙</span>Sayt sozlamalari</a>
+      <a href="#adminlar" data-v="adminlar" id="ownerLink" hidden><span class="i">♛</span>Adminlar</a>
+      <a href="#profil" data-v="profil"><span class="i">☺</span>Profil</a>
+    </nav>
+    <div class="me"><div class="ava" id="meAva"></div><div><b id="meName"></b><small id="meRole"></small></div><button class="icon-btn" onclick="logout()" title="Chiqish">⇥</button></div>
+  </aside>
+  <div class="main">
+    <div class="topbar"><button class="icon-btn" id="menuBtn">☰</button><img src="img/logo-dark.png" alt=""><button class="icon-btn" onclick="logout()">⇥</button></div>
+    <div id="page"></div>
+  </div>
+</div>
+<script src="js/common.js"></script>
+<script src="js/admin.js"></script>
+</body>
+</html>
