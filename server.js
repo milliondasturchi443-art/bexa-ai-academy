@@ -1160,7 +1160,8 @@ app.use((req, res) => res.status(404).sendFile(path.join(__dirname, 'public', 'i
 
 app.use((err, req, res, next) => {
   console.error(err);
-  res.status(500).json({ error: 'Server xatosi' });
+  const status = err.statusCode || err.status || 500;
+  res.status(status).json({ error: status === 400 ? "Noto'g'ri so'rov" : 'Server xatosi' });
 });
 
 (async () => {
